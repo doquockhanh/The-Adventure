@@ -1,4 +1,0 @@
-repository "The Adventure@unity_25100F75074A9BBB1A63@cloud"
-  path "/"
-    smartbranch "/main/2_khanh_create_map"                    
-     
