@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController_Dung : MonoBehaviour
+public class EnemyController_Bat : MonoBehaviour
 {
     public GameObject pointA;
     public GameObject pointB;
