@@ -14,34 +14,37 @@ public class PlayerController : MonoBehaviour
     private bool grounded;
     public float jump;
     private BoxCollider2D boxCollider;
-    private float horizantalInput;
+    private bool facingRight = true;
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
-        
     }
 
     // Update is called once per frame
     void Update()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
-        body.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, body.velocity.y);
-        if(horizontalInput > 0.01f)
-        {
-            transform.localScale = new Vector3(3,3,1);
-        }
-        else if(horizontalInput < -0.01f)
-        {
-            transform.localScale = new Vector3(-3,3,1);
-        }
+        Move(horizontalInput);
+        
         if(Input.GetKey(KeyCode.Space) && grounded)
-        {
             Jump();
-        }
+
         anim.SetBool("Run", horizontalInput != 0);
         anim.SetBool("grounded", grounded);
+    }
+
+    void Move(float horizontalInput)
+    {
+
+        body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
+
+        if (horizontalInput > 0 && !facingRight || horizontalInput < 0 && facingRight)
+        {
+            facingRight = !facingRight;
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        }
     }
     private void Jump()
     {
@@ -51,7 +54,7 @@ public class PlayerController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Ground") )
+        if (collision.collider.CompareTag("Ground"))
         {
             grounded = true;
         }
@@ -59,7 +62,7 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded()
     {
         RaycastHit2D raycasthit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, groundPlayer);
-            return raycasthit.collider !=null;
+        return raycasthit.collider != null;
     }
     private bool onWall()
     {
