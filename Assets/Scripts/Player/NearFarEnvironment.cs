@@ -8,6 +8,12 @@ public class NearFarEnvironment : MonoBehaviour
     public float[] parallaxScales;
     private Vector3 previousPlayerPosition;
     private List<Vector2> diffPos = new();
+    public BoxCollider2D boundingBox;
+    private Vector3 minBounds;
+    private Vector3 maxBounds;
+    private float halfHeight;
+    private float halfWidth;
+    private Camera mainCamera;
     void Start()
     {
         if (player == null)
@@ -20,6 +26,9 @@ public class NearFarEnvironment : MonoBehaviour
             Vector2 diff = new(backgrounds[i].position.x - player.position.x, backgrounds[i].position.y - player.position.y);
             diffPos.Add(diff);
         }
+        minBounds = boundingBox.bounds.min;
+        maxBounds = boundingBox.bounds.max;
+        mainCamera = Camera.main;
     }
 
     void FixedUpdate()
@@ -37,6 +46,13 @@ public class NearFarEnvironment : MonoBehaviour
             float backgroundTargetPosY = player.position.y + diffPos[i].y;
             backgrounds[i].position = new Vector3(backgroundTargetPosX, backgroundTargetPosY, backgrounds[i].position.z);
         }
+        Vector3 newPosition = player.position;
         previousPlayerPosition = player.position;
+        newPosition.z = transform.position.z;
+
+        float clampedX = Mathf.Clamp(newPosition.x, minBounds.x + halfWidth, maxBounds.x - halfWidth);
+        float clampedY = Mathf.Clamp(newPosition.y, minBounds.y + halfHeight, maxBounds.y - halfHeight);
+
+        transform.position = new Vector3(clampedX, clampedY, newPosition.z);
     }
 }
