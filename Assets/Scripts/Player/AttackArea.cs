@@ -12,4 +12,12 @@ public class AttackArea : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform.CompareTag("Enemy"))
+        {
+            Destroy(collision.gameObject);
+        }
+    }
 }
