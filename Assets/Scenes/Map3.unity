@@ -17733,8 +17733,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  pointA: {fileID: 0}
-  pointB: {fileID: 0}
+  pointA: {fileID: 1281709742}
+  pointB: {fileID: 1638625647}
   damge: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
