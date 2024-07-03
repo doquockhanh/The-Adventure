@@ -6256,11 +6256,10 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &817000093
+--- !u!1 &817000093 stripped
 GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 7960466564265502642, guid: 2b0c3b2bc1c3146449075d00bacc3aca, type: 3}
+  m_PrefabInstance: {fileID: 3225357491918400120}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
