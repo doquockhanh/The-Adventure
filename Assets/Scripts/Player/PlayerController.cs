@@ -73,4 +73,13 @@ public class PlayerController : MonoBehaviour
     {
         return true;
     }
+
+    public void onLevelUp() {
+        Debug.Log("level Up");
+    }
+
+    public void OnDie() {
+        Debug.Log("die");
+        Destroy(gameObject);
+    }
 }
