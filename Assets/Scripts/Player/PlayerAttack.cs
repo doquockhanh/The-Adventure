@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -6,46 +6,72 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    [SerializeField] private float attackCooldown;
     private Animator anim;
     private PlayerController playerMovement;
-    private float cooldownTimer = Mathf.Infinity;
     public GameObject attackArea;
     private bool attacking = false;
-    private float TimeToAttack = 0.5f;
-    private float timer = 0f;
+    private float timeToAttack = 1f;
+    private float timer = 1f;
+
 
     private void Start()
     {
-        attackArea = transform.GetChild(0).gameObject;
+        if (transform.childCount > 0)
+        {
+            attackArea = transform.GetChild(0).gameObject;
+        }
+        else
+        {
+            Debug.LogError("Không tìm thấy vùng tấn công.");
+        }
     }
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
+        if (anim == null)
+        {
+            Debug.LogError("Không tìm thấy Animator.");
+        }
+
         playerMovement = GetComponent<PlayerController>();
+        if (playerMovement == null)
+        {
+            Debug.LogError("Không tìm thấy PlayerController.");
+        }
+
     }
+
     private void Update()
     {
-        if (Input.GetMouseButton(0) && cooldownTimer > attackCooldown && playerMovement.canAttack())
+        if (Input.GetMouseButton(0) && playerMovement != null && playerMovement.canAttack())
         {
             Attack();
-            cooldownTimer += Time.deltaTime;
 
         }
+
         if (attacking)
         {
-            timer = Time.deltaTime;
-            if (timer > TimeToAttack)
+            timer += Time.deltaTime;
+            if (timer > timeToAttack)
             {
                 timer = 0f;
                 attacking = false;
-                attackArea.SetActive(attacking);
+                attackArea.SetActive(false);
             }
         }
     }
+
     private void Attack()
     {
-        anim.SetTrigger("attack");
-        cooldownTimer = 0;
+        if (anim != null)
+        {
+            anim.SetTrigger("attack");
+        }
+        attacking = true;
+        if (attackArea != null)
+        {
+            attackArea.SetActive(true);
+        }
     }
 }
