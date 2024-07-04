@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,11 +16,18 @@ public class PlayerController : MonoBehaviour
     public float jump;
     private BoxCollider2D boxCollider;
     private bool facingRight = true;
+    public GameObject questionMenuUI;
+    private bool isShowQuestion = false;
+    [SerializeField] public AudioClip walkSound;
+    public AudioSource audioSource;
+    
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
+        ResumeGame();
+        
     }
 
     // Update is called once per frame
@@ -44,6 +52,16 @@ public class PlayerController : MonoBehaviour
         {
             facingRight = !facingRight;
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        }
+
+        if (horizontalInput != 0 && grounded && !audioSource.isPlaying)
+        {
+            audioSource.clip = walkSound;
+            audioSource.Play();
+        }
+        else if (horizontalInput == 0 || !grounded)
+        {
+            audioSource.Stop();
         }
     }
     private void Jump()
@@ -73,6 +91,32 @@ public class PlayerController : MonoBehaviour
     {
         return true;
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("NPC"))
+        {
+            
+           
+                ShowQuestion();
+            
+        }
+       
+    }
+    void ShowQuestion()
+    {
+
+        questionMenuUI.SetActive(true);
+        Time.timeScale = 1f;
+        isShowQuestion = true;
+    }
+    public void ResumeGame()
+    {
+
+        questionMenuUI.SetActive(false);
+        Time.timeScale = 1f;
+        isShowQuestion = false;
+    }
+   
 
     public void onLevelUp() {
         Debug.Log("level Up");
