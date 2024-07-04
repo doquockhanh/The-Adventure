@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 2763857686076643225}
   - component: {fileID: 3627910950811453840}
   - component: {fileID: 5934523312433617717}
+  - component: {fileID: -1745812415914707395}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -314,6 +315,7 @@ MonoBehaviour:
   - {fileID: 0}
   parallaxScales:
   - 0.1
+  boundingBox: {fileID: 0}
 --- !u!114 &5934523312433617717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,6 +330,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackCooldown: 0
   attackArea: {fileID: 1500887815996951947}
+--- !u!114 &-1745812415914707395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8394538420756113781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bad48282cb5b754ba51dd88bdb2ade6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heath: 20
+  maxHeath: 20
+  damage: 5
+  exp: 0
+  lv: 1
+  maxExp: 10
+  lvDmg: 1
+  lvHeath: 4
+  lvExp: 1
 --- !u!1 &9085869066713557587
 GameObject:
   m_ObjectHideFlags: 0
