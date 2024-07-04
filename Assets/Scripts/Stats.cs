@@ -15,9 +15,24 @@ public class Stats : MonoBehaviour
     public event System.Action<Stats> OnLevelUp;
     public event System.Action<Stats> OnDeath;
 
+    private HpBarController hpBarController;
+
+    void Start()
+    {
+        hpBarController = transform.GetComponentInChildren<HpBarController>();
+        UpdateHpBar();
+    }
+
     public void TakeDamage(float damage)
     {
         heath -= damage;
+
+        UpdateHpBar();
+        CheckDie();
+    }
+
+    private void CheckDie()
+    {
         if (heath <= 0)
         {
             if (OnLevelUp != null)
@@ -49,6 +64,20 @@ public class Stats : MonoBehaviour
         if (OnLevelUp != null)
         {
             OnLevelUp?.Invoke(this);
+        }
+
+        UpdateHpBar();
+    }
+
+    private void UpdateHpBar()
+    {
+        if (hpBarController != null)
+        {
+            hpBarController.UpdateHealth(heath, maxHeath);
+        }
+        else
+        {
+            Debug.Log("Hpbar is null");
         }
     }
 }
