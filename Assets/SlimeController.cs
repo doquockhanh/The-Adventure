@@ -9,15 +9,11 @@ public class Enemy : MonoBehaviour
     public GameObject pointA;
     public GameObject pointB;
     private Rigidbody2D rb;
-    private Animator anim;
     private Transform currentPoint;
-    [SerializeField] private float damge;
     void Start()
     {
-        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         currentPoint = pointB.transform;
-       
     }
 
     // Update is called once per frame
@@ -49,12 +45,4 @@ public class Enemy : MonoBehaviour
         localScale.x *= -1;
         transform.localScale = localScale;
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            anim.SetTrigger("Attack");
-        }
-    }
-
 }
