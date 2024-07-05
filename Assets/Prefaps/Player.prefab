@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
+  Sound: {fileID: 0}
 --- !u!1 &8394538420756113781
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,7 +142,6 @@ Transform:
   m_Children:
   - {fileID: 8269833267124531256}
   - {fileID: 9077099423629461370}
-  - {fileID: 5705334736025790869}
   - {fileID: 3450784248057245854}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -301,6 +301,9 @@ MonoBehaviour:
     m_Bits: 0
   body: {fileID: 2180054056554354657}
   jump: 8
+  questionMenuUI: {fileID: 0}
+  walkSound: {fileID: 0}
+  audioSource: {fileID: 0}
 --- !u!114 &3627910950811453840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,8 +334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66b49d7f29ff0a24ab3b000a8f63a99f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackCooldown: 0
-  attackArea: {fileID: 1500887815996951947}
+  attackArea: {fileID: 0}
 --- !u!114 &-1745812415914707395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,7 +369,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSide: 1
-  attackArea: {fileID: 1581861225502105519}
 --- !u!1 &9085869066713557587
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,6 +556,10 @@ PrefabInstance:
     - target: {fileID: 3967621460040007038, guid: 7626bc53c30b3e8479ae0a7c251ca843, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7466096411874926772, guid: 7626bc53c30b3e8479ae0a7c251ca843, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1833246757
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
