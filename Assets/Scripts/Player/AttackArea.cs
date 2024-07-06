@@ -5,14 +5,19 @@ using UnityEngine;
 
 public class AttackArea : MonoBehaviour
 {
-    public int damage;
     public AudioClip Sound;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+    
+        Stats PlayerStats = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<Stats>();
+        Stats EnemyStats = collision.GetComponent<Stats>();
+        if(EnemyStats != null && PlayerStats !=null )
         {
-            Destroy(collision.gameObject);
+            EnemyStats.TakeDamage(PlayerStats.damage);
+           
         }
+        
+        
         PlayShootSoundPlayer();
     }
     private void PlayShootSoundPlayer()
@@ -27,11 +32,5 @@ public class AttackArea : MonoBehaviour
         Destroy(tempGO, Sound.length);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.transform.CompareTag("Enemy"))
-        {
-            Destroy(collision.gameObject);
-        }
-    }
+    
 }

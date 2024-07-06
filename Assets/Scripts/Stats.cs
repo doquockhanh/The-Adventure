@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Stats : MonoBehaviour
@@ -35,9 +37,9 @@ public class Stats : MonoBehaviour
     {
         if (heath <= 0)
         {
-            if (OnLevelUp != null)
+            if (OnDeath != null)
             {
-                OnLevelUp?.Invoke(this);
+                OnDeath?.Invoke(this);
             }
             Debug.Log(gameObject.name + "die");
         }

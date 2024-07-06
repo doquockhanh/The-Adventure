@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyController_Bat : MonoBehaviour
@@ -12,8 +13,10 @@ public class EnemyController_Bat : MonoBehaviour
     private Transform currentPoint;
     public float speed;
     public float chaseSpeed;
-    public float damageAmount = 0.4f;
+    public float dame;
     public float chaseRange = 10f;
+    
+
 
 
 
@@ -23,6 +26,7 @@ public class EnemyController_Bat : MonoBehaviour
         anim = GetComponent<Animator>();
         currentPoint = pointB.transform;
         anim.SetBool("Ismoving", true);
+        gameObject.GetComponent<Stats>().OnDeath += EnemyDie;
     }
     private void FixedUpdate()
     {
@@ -38,7 +42,8 @@ public class EnemyController_Bat : MonoBehaviour
     }
     private void Patrol()
     {
-        Vector2 point = currentPoint.position - transform.position;
+     
+            Vector2 point = currentPoint.position - transform.position;
         if (currentPoint == pointB.transform)
         {
             rb.velocity = new Vector2(speed, 0);
@@ -73,7 +78,10 @@ public class EnemyController_Bat : MonoBehaviour
         {
             flip();
         }
+       
     }
+   
+   
     private void flip()
     {
         Vector3 localScale = transform.localScale;
@@ -85,5 +93,25 @@ public class EnemyController_Bat : MonoBehaviour
         Gizmos.DrawWireSphere(pointA.transform.position, 0.5f);
         Gizmos.DrawWireSphere(pointB.transform.position, 0.5f);
         Gizmos.DrawLine(pointA.transform.position, pointB.transform.position);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {   
+            Stats EnemyStats = transform.GetComponent<Stats>();
+            Stats PlayerStats = collision.GetComponent<Stats>();
+            if (PlayerStats != null)
+            {
+                PlayerStats.TakeDamage(EnemyStats.damage);
+            }
+           
+
+        }
+    }
+    public void EnemyDie(Stats stats)
+    {
+        Destroy(gameObject);   
+        
     }
 }
