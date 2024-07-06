@@ -7768,36 +7768,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &670565943 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6046813161567380961, guid: 7626bc53c30b3e8479ae0a7c251ca843, type: 3}
-  m_PrefabInstance: {fileID: 2083418061}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &670565945
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 670565943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c32ecef93fecc340911089eb18fadfb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hpSlider: {fileID: 670565946}
-  hpText: {fileID: 1444532481}
---- !u!114 &670565946 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6413035433030882604, guid: 7626bc53c30b3e8479ae0a7c251ca843, type: 3}
-  m_PrefabInstance: {fileID: 2083418061}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 670565943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &710492838
 GameObject:
   m_ObjectHideFlags: 0
@@ -8603,7 +8573,6 @@ MonoBehaviour:
   player: {fileID: 1949662588}
   speed: 3
   chaseSpeed: 3
-  dame: 9
   chaseRange: 4
 --- !u!95 &965561400
 Animator:
@@ -8765,11 +8734,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 965561398}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7d5f84c9d9f53440993ebb78a1b385e, type: 3}
+  m_Script: {fileID: 11500000, guid: 8bad48282cb5b754ba51dd88bdb2ade6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   heath: 20
   maxHeath: 20
+  damage: 5
+  exp: 0
+  lv: 0
+  maxExp: 0
+  lvDmg: 0
+  lvHeath: 0
+  lvExp: 0
 --- !u!1 &991466134
 GameObject:
   m_ObjectHideFlags: 0
@@ -11936,17 +11912,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1444532481 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8293135163196755368, guid: 7626bc53c30b3e8479ae0a7c251ca843, type: 3}
-  m_PrefabInstance: {fileID: 2083418061}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1450796931
 GameObject:
   m_ObjectHideFlags: 0
@@ -14062,6 +14027,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: BaseCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2293302739144005106, guid: 7626bc53c30b3e8479ae0a7c251ca843, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 385.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 2293302739144005106, guid: 7626bc53c30b3e8479ae0a7c251ca843, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 101.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 2293302739144005106, guid: 7626bc53c30b3e8479ae0a7c251ca843, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.0025144
+      objectReference: {fileID: 0}
+    - target: {fileID: 2293302739144005106, guid: 7626bc53c30b3e8479ae0a7c251ca843, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.64
+      objectReference: {fileID: 0}
     - target: {fileID: 3325320909857343316, guid: 7626bc53c30b3e8479ae0a7c251ca843, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -14154,14 +14135,26 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: 787853409
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2975329613237550760, guid: 7626bc53c30b3e8479ae0a7c251ca843, type: 3}
+    - target: {fileID: 8734715439337586709, guid: 7626bc53c30b3e8479ae0a7c251ca843, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 96.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734715439337586709, guid: 7626bc53c30b3e8479ae0a7c251ca843, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 53.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734715439337586709, guid: 7626bc53c30b3e8479ae0a7c251ca843, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.000005722
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734715439337586709, guid: 7626bc53c30b3e8479ae0a7c251ca843, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.000020981
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6046813161567380961, guid: 7626bc53c30b3e8479ae0a7c251ca843, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 670565945}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7626bc53c30b3e8479ae0a7c251ca843, type: 3}
 --- !u!1 &2085690990
 GameObject:

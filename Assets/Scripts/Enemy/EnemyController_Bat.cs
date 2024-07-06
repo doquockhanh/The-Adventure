@@ -13,13 +13,7 @@ public class EnemyController_Bat : MonoBehaviour
     private Transform currentPoint;
     public float speed;
     public float chaseSpeed;
-    public float dame;
     public float chaseRange = 10f;
-    
-
-
-
-
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -101,7 +95,7 @@ public class EnemyController_Bat : MonoBehaviour
         {   
             Stats EnemyStats = transform.GetComponent<Stats>();
             Stats PlayerStats = collision.GetComponent<Stats>();
-            if (PlayerStats != null)
+            if (PlayerStats != null && EnemyStats != null)
             {
                 PlayerStats.TakeDamage(EnemyStats.damage);
             }
