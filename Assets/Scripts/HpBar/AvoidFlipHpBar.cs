@@ -2,21 +2,21 @@ using UnityEngine;
 
 public class AvoidFlip : MonoBehaviour
 {
-    private Transform baseCanvas;
+    private Transform thisHolder;
     public bool currentSide = true;
 
     void Awake()
     {
-        baseCanvas = transform.Find("BaseCanvas");
+        thisHolder = transform.parent;
     }
 
     void Update()
     {
-        if (baseCanvas == null) return;
-        if (currentSide != transform.localScale.x > 0)
+        if (thisHolder == null) return;
+        if (currentSide != thisHolder.localScale.x > 0)
         {
-            currentSide = transform.localScale.x > 0;
-            baseCanvas.localScale = new Vector3(-baseCanvas.localScale.x, baseCanvas.localScale.y, 0);
+            currentSide = thisHolder.localScale.x > 0;
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, 0);
         }
     }
 }
