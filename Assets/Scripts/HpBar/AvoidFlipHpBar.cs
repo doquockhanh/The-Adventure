@@ -7,7 +7,7 @@ public class AvoidFlip : MonoBehaviour
 
     void Awake()
     {
-        thisHolder = transform.parent;;
+        thisHolder = transform.parent;
     }
 
     void Update()

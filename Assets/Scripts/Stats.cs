@@ -1,5 +1,3 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Stats : MonoBehaviour
@@ -16,6 +14,7 @@ public class Stats : MonoBehaviour
     public float lvExp = 0;
     public event System.Action<Stats> OnLevelUp;
     public event System.Action<Stats> OnDeath;
+    public event System.Action<Stats> OnTakeDamage;
 
     private HpBarController hpBarController;
 
@@ -29,6 +28,10 @@ public class Stats : MonoBehaviour
     {
         heath -= damage;
 
+        if (OnTakeDamage != null)
+        {
+            OnTakeDamage?.Invoke(this);
+        }
         UpdateHpBar();
         CheckDie();
     }
