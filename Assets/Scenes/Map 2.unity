@@ -8209,7 +8209,7 @@ MonoBehaviour:
   pointB: {fileID: 713359265}
   player: {fileID: 1949662588}
   speed: 3
-  chaseSpeed: 3
+  chaseSpeed: 5
   chaseRange: 4
 --- !u!95 &965561400
 Animator:
