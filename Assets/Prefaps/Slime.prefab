@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 816793395855650115}
   - component: {fileID: 8976285927597936512}
   - component: {fileID: 74874181854544572}
+  - component: {fileID: 462671206308845631}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Untagged
@@ -185,6 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 5585862519238838531, guid: fe80e96c650accd459dff8d64f88bd04, type: 3}
+  sprite: {fileID: 0}
 --- !u!114 &74874181854544572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,4 +202,24 @@ MonoBehaviour:
   speed: 2
   pointA: {fileID: 0}
   pointB: {fileID: 0}
-  damge: 0
+--- !u!114 &462671206308845631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5106089486807236274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bad48282cb5b754ba51dd88bdb2ade6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heath: 10
+  maxHeath: 10
+  damage: 2
+  exp: 0
+  lv: 0
+  maxExp: 0
+  lvDmg: 0
+  lvHeath: 0
+  lvExp: 0
