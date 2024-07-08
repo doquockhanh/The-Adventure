@@ -6,7 +6,8 @@ enum AegleStatus
 {
     moving = 1,
     following = 2,
-    attacking = 3
+    attacking = 3,
+    die = 4
 }
 
 public class AegleController : MonoBehaviour
@@ -16,6 +17,7 @@ public class AegleController : MonoBehaviour
     public float speed = 5f;
     public float speedY = 1f;
     public float attackRate = 1f;
+    public float exp = 1f;
     private bool moveRight = false;
     private AegleStatus status = AegleStatus.moving;
     public float attackRange = 7f;
@@ -63,7 +65,6 @@ public class AegleController : MonoBehaviour
                 }
             case AegleStatus.attacking:
                 {
-
                     Attacking();
                     break;
                 }
@@ -180,10 +181,12 @@ public class AegleController : MonoBehaviour
         }
     }
 
-    private IEnumerator ResetVelocity() {
+    private IEnumerator ResetVelocity()
+    {
         while (true)
         {
-            if(status == AegleStatus.moving || status == AegleStatus.following) {
+            if (status == AegleStatus.moving || status == AegleStatus.following)
+            {
                 rb.velocity = Vector3.zero;
             }
 
@@ -228,7 +231,7 @@ public class AegleController : MonoBehaviour
         {
             AttackDone();
         }
-        if (collision.gameObject.CompareTag("Player"))
+        if (status != AegleStatus.die && collision.gameObject.CompareTag("Player"))
         {
             Stats playerStats = collision.collider.GetComponent<Stats>();
             if (playerStats != null && stats != null)
@@ -240,7 +243,17 @@ public class AegleController : MonoBehaviour
 
     public void OnDeath(Stats stats)
     {
-        Destroy(gameObject);
+        StopAllCoroutines();
+        status = AegleStatus.die;
+        player.GetComponent<Stats>().SetExp(exp);
+        Destroy(gameObject.GetComponent<Stats>());
+
+        // game object destroy after this anim end
+        animator.SetTrigger("die");
+
+        // hoac neu khong the thi tu dong destroy sau 2s
+        Destroy(gameObject, 2f);
+        rb.gravityScale = 1f;
     }
 
     public void OnTakeDame(Stats stats)

@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,14 +21,18 @@ public class PlayerController : MonoBehaviour
     private bool isShowQuestion = false;
     [SerializeField] public AudioClip walkSound;
     public AudioSource audioSource;
-    
+    private Canvas baseCanvas;
+    private GameObject blueTextPrefap;
+
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
         ResumeGame();
-        
+        GetComponent<Stats>().OnGetExp += OnGetExp;
+        baseCanvas = transform.Find("BaseCanvas").GetComponent<Canvas>();
+        blueTextPrefap = Resources.Load<GameObject>("textBlue");
     }
 
     // Update is called once per frame
@@ -35,8 +40,8 @@ public class PlayerController : MonoBehaviour
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         Move(horizontalInput);
-        
-        if(Input.GetKey(KeyCode.Space) && grounded)
+
+        if (Input.GetKey(KeyCode.Space) && grounded)
             Jump();
 
         anim.SetBool("Run", horizontalInput != 0);
@@ -95,12 +100,12 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.CompareTag("NPC"))
         {
-            
-           
-                ShowQuestion();
-            
+
+
+            ShowQuestion();
+
         }
-       
+
     }
     void ShowQuestion()
     {
@@ -116,14 +121,27 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 1f;
         isShowQuestion = false;
     }
-   
 
-    public void onLevelUp() {
+    public void OnLevelUp()
+    {
         Debug.Log("level Up");
     }
 
-    public void OnDie() {
+    public void OnDie()
+    {
         Debug.Log("die");
         Destroy(gameObject);
+    }
+
+    public void OnGetExp(float exp)
+    {
+        Transform textSpawnPoint = baseCanvas.transform.Find("textSpawnPoint");
+        Vector2 pos = textSpawnPoint == null ? baseCanvas.transform.position : textSpawnPoint.transform.position;
+        pos.x = Random.Range(pos.x - 1f, pos.x + 1f);
+        GameObject damageText = Instantiate(blueTextPrefap, pos, Quaternion.identity);
+        damageText.transform.SetParent(baseCanvas.transform);
+        TextController textController = damageText.GetComponent<TextController>();
+        textController.sizeScale = 2f;
+        textController.text = $"+{exp} Exp";
     }
 }
