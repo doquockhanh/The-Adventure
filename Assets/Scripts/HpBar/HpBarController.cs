@@ -10,6 +10,7 @@ public class HpBarController : MonoBehaviour
 
     void Awake()
     {
+    
         hpSlider = transform.GetComponent<Slider>();
         hpText = transform.Find("hpTxt").GetComponent<Text>();
     }
@@ -22,4 +23,5 @@ public class HpBarController : MonoBehaviour
         if (hpText != null)
             hpText.text = $"{hp}";
     }
+    
 }

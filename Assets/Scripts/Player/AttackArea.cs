@@ -20,6 +20,18 @@ public class AttackArea : MonoBehaviour
         
         PlayShootSoundPlayer();
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        Stats PlayerStats = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<Stats>();
+        Stats EnemyStats = collision.collider.GetComponent<Stats>();
+        if (EnemyStats != null && PlayerStats != null)
+        {
+            EnemyStats.TakeDamage(PlayerStats.damage);
+
+        }
+        
+    }
     private void PlayShootSoundPlayer()
     {
 
