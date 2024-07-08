@@ -71,11 +71,11 @@ public class Enemy : MonoBehaviour
             Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Stats playerStats = collision.collider.GetComponent<Stats>();
+            Stats playerStats = collision.GetComponent<Stats>();
             if (playerStats != null && stats != null)
             {
                 playerStats.TakeDamage(stats.damage);
