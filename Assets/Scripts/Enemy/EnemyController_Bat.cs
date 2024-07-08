@@ -8,14 +8,10 @@ public class EnemyController_Bat : MonoBehaviour
     public GameObject player;
     private Rigidbody2D rb;
     private Animator anim;
-    private Transform currentPoint;
     public float speed;
-    private float chaseSpeedOriginal;
-    public float chaseSpeed;
+    public float chaseSpeed = 6;
     public float chaseRange = 10f;
     private float originalChaseRange = 10f;
-    private bool canChase = true;
-    private bool moveRight = false;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -23,7 +19,6 @@ public class EnemyController_Bat : MonoBehaviour
         anim.SetBool("Ismoving", false);
         gameObject.GetComponent<Stats>().OnDeath += EnemyDie;
         originalChaseRange = chaseRange;
-        chaseSpeedOriginal = chaseSpeed;
 
     }
     private void FixedUpdate()
@@ -54,10 +49,8 @@ public class EnemyController_Bat : MonoBehaviour
     private IEnumerator ResetChaseRange()
     {
         chaseRange = 0f;
-        chaseSpeed = 2f;
         yield return new WaitForSeconds(0.5f);
         chaseRange = originalChaseRange;
-        chaseSpeed = chaseSpeedOriginal;
     }
 
 
