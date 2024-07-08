@@ -15,6 +15,7 @@ public class Stats : MonoBehaviour
     public event System.Action<Stats> OnLevelUp;
     public event System.Action<Stats> OnDeath;
     public event System.Action<Stats> OnTakeDamage;
+    public event System.Action<float> OnGetExp;
 
     private HpBarController hpBarController;
 
@@ -51,6 +52,11 @@ public class Stats : MonoBehaviour
     public void SetExp(float exp)
     {
         this.exp += exp;
+
+        if(OnGetExp != null) {
+            OnGetExp?.Invoke(exp);
+        }
+
         if (this.exp >= maxExp)
         {
             LevelUp();
