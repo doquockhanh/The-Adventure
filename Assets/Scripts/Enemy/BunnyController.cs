@@ -7,17 +7,20 @@ public class BunnyController : MonoBehaviour
     public Vector2 limitMove1;
     public Vector2 limitMove2;
     public float jumpForce = 5f;
+    public float exp = 1f;
     private bool isMoving = true;
     private bool inGround = true;
     private float lastRandom = 1f;
     private Rigidbody2D rb;
     private Animator animator;
     private Stats stats;
+    private Transform player;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
 
         if (TryGetComponent(out stats))
         {
@@ -97,6 +100,14 @@ public class BunnyController : MonoBehaviour
 
     public void OnDeath(Stats stats)
     {
-        Destroy(gameObject);
+        StopAllCoroutines();
+        player.GetComponent<Stats>().SetExp(exp);
+        Destroy(gameObject.GetComponent<Stats>());
+
+        // game object destroy after this anim end
+        animator.SetTrigger("die");
+
+        // hoac neu khong the thi tu dong destroy sau 2s
+        Destroy(gameObject, 2f);
     }
 }
