@@ -63,7 +63,7 @@ public class EnemyController_Bat : MonoBehaviour
         Vector2 direction = (player.transform.position - transform.position).normalized;
         rb.velocity = direction * chaseSpeed;
         anim.SetBool("Ismoving", true);
-
+        
         if (direction.x > 0 && transform.localScale.x < 0)
         {
             flip();
@@ -74,8 +74,8 @@ public class EnemyController_Bat : MonoBehaviour
         }
        
     }
-   
-   
+
+
     private void flip()
     {
         Vector3 localScale = transform.localScale;
