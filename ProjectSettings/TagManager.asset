@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - NPC
   - Point
+  - Ladder
   layers:
   - Default
   - TransparentFX

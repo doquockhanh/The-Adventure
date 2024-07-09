@@ -11,6 +11,7 @@ public class EnemyController_Bat : MonoBehaviour
     public float speed;
     public float chaseSpeed = 6;
     public float chaseRange = 10f;
+    public float exp = 1f;
     private float originalChaseRange = 10f;
     private void Start()
     {
@@ -83,7 +84,7 @@ public class EnemyController_Bat : MonoBehaviour
     }
     public void EnemyDie(Stats stats)
     {
+        player.GetComponent<Stats>().SetExp(exp);
         Destroy(gameObject);   
-        
     }
 }

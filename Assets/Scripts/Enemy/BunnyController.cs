@@ -15,16 +15,21 @@ public class BunnyController : MonoBehaviour
     private Animator animator;
     private Stats stats;
     private Transform player;
+    private Canvas baseCanvas;
+    private GameObject grayTextPrefap;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        baseCanvas = transform.Find("BaseCanvas").GetComponent<Canvas>();
+        grayTextPrefap = Resources.Load<GameObject>("textGray");
 
         if (TryGetComponent(out stats))
         {
             stats.OnDeath += OnDeath;
+            stats.OnTakeDamage += OnTakeDame;
         }
 
         StartCoroutine(RandomSide());
@@ -109,5 +114,18 @@ public class BunnyController : MonoBehaviour
 
         // hoac neu khong the thi tu dong destroy sau 2s
         Destroy(gameObject, 2f);
+    }
+
+    public void OnTakeDame(float damage)
+    {
+        animator.SetTrigger("hurt");
+        Transform textSpawnPoint = baseCanvas.transform.Find("textSpawnPoint");
+        Vector2 pos = textSpawnPoint == null ? baseCanvas.transform.position : textSpawnPoint.transform.position;
+        pos.x = Random.Range(pos.x - 1f, pos.x + 1f);
+        GameObject damageText = Instantiate(grayTextPrefap, pos, Quaternion.identity);
+        damageText.transform.SetParent(baseCanvas.transform);
+        TextController textController = damageText.GetComponent<TextController>();
+        textController.sizeScale = 2f;
+        textController.text = $"-{damage} Hp";
     }
 }
