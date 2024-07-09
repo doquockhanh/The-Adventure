@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -10,11 +11,19 @@ public class Enemy : MonoBehaviour
     public GameObject pointB;
     private Rigidbody2D rb;
     private Transform currentPoint;
+    private Stats stats;
+    public GameObject enemyPrefab;
+    public GameObject sprite;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         currentPoint = pointB.transform;
+        if (TryGetComponent(out stats))
+        {
+            stats.OnDeath += OnDeath;
+        }
     }
+
 
     // Update is called once per frame
     void Update()
@@ -44,5 +53,33 @@ public class Enemy : MonoBehaviour
         Vector3 localScale = transform.localScale;
         localScale.x *= -1;
         transform.localScale = localScale;
+    }
+    public void OnDeath(Stats stats)
+    {
+        Destroy(gameObject);
+        SpawnEnemies();
+    }
+    public void SpawnEnemies()
+    {
+        int numberOfEnemiesToSpawn = 2;
+        float randomX = transform.position.x - 1;
+        float randomX2 = transform.position.x + 1;
+
+        for (int i = 0; i < numberOfEnemiesToSpawn; i++)
+        {
+            Vector3 spawnPosition = new Vector3(Random.Range(randomX, randomX2), -0.284f, 0);
+            Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Stats playerStats = collision.collider.GetComponent<Stats>();
+            if (playerStats != null && stats != null)
+            {
+                playerStats.TakeDamage(stats.damage);
+            }
+        }
     }
 }
