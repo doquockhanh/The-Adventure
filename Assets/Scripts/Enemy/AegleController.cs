@@ -28,11 +28,17 @@ public class AegleController : MonoBehaviour
     private Animator animator;
     private Stats stats;
     private Rigidbody2D rb;
+    private Canvas baseCanvas;
+    private GameObject grayTextPrefap;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        baseCanvas = transform.Find("BaseCanvas").GetComponent<Canvas>();
+        grayTextPrefap = Resources.Load<GameObject>("textGray");
+
         if (TryGetComponent(out stats))
         {
             stats.OnDeath += OnDeath;
@@ -256,8 +262,16 @@ public class AegleController : MonoBehaviour
         rb.gravityScale = 1f;
     }
 
-    public void OnTakeDame(Stats stats)
+    public void OnTakeDame(float damage)
     {
         animator.SetTrigger("hurt");
+        Transform textSpawnPoint = baseCanvas.transform.Find("textSpawnPoint");
+        Vector2 pos = textSpawnPoint == null ? baseCanvas.transform.position : textSpawnPoint.transform.position;
+        pos.x = Random.Range(pos.x - 1f, pos.x + 1f);
+        GameObject damageText = Instantiate(grayTextPrefap, pos, Quaternion.identity);
+        damageText.transform.SetParent(baseCanvas.transform);
+        TextController textController = damageText.GetComponent<TextController>();
+        textController.sizeScale = 2f;
+        textController.text = $"-{damage} Hp";
     }
 }

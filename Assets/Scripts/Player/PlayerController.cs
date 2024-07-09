@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     public AudioSource audioSource;
     private Canvas baseCanvas;
     private GameObject blueTextPrefap;
+    private GameObject redTextPrefap;
 
     void Start()
     {
@@ -31,8 +32,11 @@ public class PlayerController : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         ResumeGame();
         GetComponent<Stats>().OnGetExp += OnGetExp;
+        GetComponent<Stats>().OnTakeDamage += OnTakeDamage;
+        GetComponent<Stats>().OnDeath += OnDie;
         baseCanvas = transform.Find("BaseCanvas").GetComponent<Canvas>();
         blueTextPrefap = Resources.Load<GameObject>("textBlue");
+        redTextPrefap = Resources.Load<GameObject>("textRed");
     }
 
     // Update is called once per frame
@@ -81,6 +85,11 @@ public class PlayerController : MonoBehaviour
         {
             grounded = true;
         }
+
+        if (collision.collider.CompareTag("Finish"))
+        {
+            SceneManager.LoadScene(2);
+        }
     }
     public bool isGrounded()
     {
@@ -127,7 +136,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("level Up");
     }
 
-    public void OnDie()
+    public void OnDie(Stats stats)
     {
         Debug.Log("die");
         Destroy(gameObject);
@@ -138,10 +147,21 @@ public class PlayerController : MonoBehaviour
         Transform textSpawnPoint = baseCanvas.transform.Find("textSpawnPoint");
         Vector2 pos = textSpawnPoint == null ? baseCanvas.transform.position : textSpawnPoint.transform.position;
         pos.x = Random.Range(pos.x - 1f, pos.x + 1f);
-        GameObject damageText = Instantiate(blueTextPrefap, pos, Quaternion.identity);
+        GameObject expText = Instantiate(blueTextPrefap, pos, Quaternion.identity);
+        expText.transform.SetParent(baseCanvas.transform);
+        TextController textController = expText.GetComponent<TextController>();
+        textController.sizeScale = 2f;
+        textController.text = $"+{exp} Exp";
+    }
+
+    public void OnTakeDamage(float damage) {
+        Transform textSpawnPoint = baseCanvas.transform.Find("textSpawnPoint");
+        Vector2 pos = textSpawnPoint == null ? baseCanvas.transform.position : textSpawnPoint.transform.position;
+        pos.x = Random.Range(pos.x - 1f, pos.x + 1f);
+        GameObject damageText = Instantiate(redTextPrefap, pos, Quaternion.identity);
         damageText.transform.SetParent(baseCanvas.transform);
         TextController textController = damageText.GetComponent<TextController>();
         textController.sizeScale = 2f;
-        textController.text = $"+{exp} Exp";
+        textController.text = $"-{damage} Hp";
     }
 }

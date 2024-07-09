@@ -14,7 +14,7 @@ public class Stats : MonoBehaviour
     public float lvExp = 0;
     public event System.Action<Stats> OnLevelUp;
     public event System.Action<Stats> OnDeath;
-    public event System.Action<Stats> OnTakeDamage;
+    public event System.Action<float> OnTakeDamage;
     public event System.Action<float> OnGetExp;
 
     private HpBarController hpBarController;
@@ -31,7 +31,7 @@ public class Stats : MonoBehaviour
 
         if (OnTakeDamage != null)
         {
-            OnTakeDamage?.Invoke(this);
+            OnTakeDamage?.Invoke(damage);
         }
         UpdateHpBar();
         CheckDie();
