@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-
+    public GameObject waypoints;
     public float speed = 3f;
     private Rigidbody2D myRigidbody; 
     private Animator anim; 
