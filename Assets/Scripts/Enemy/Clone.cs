@@ -1,5 +1,6 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class SlimeClone : MonoBehaviour
@@ -8,12 +9,17 @@ public class SlimeClone : MonoBehaviour
     public float speed = 20f;
     private Rigidbody2D rb;
     private GameObject target;
- 
-    private int health = 0;
+    private Stats stats;
+    public GameObject deathParticlePrefab;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         FindTarget();
+        if (TryGetComponent(out stats))
+        {
+            stats.OnDeath += OnDeath;
+        }
     }
     void FindTarget()
     {
@@ -33,6 +39,7 @@ public class SlimeClone : MonoBehaviour
             Vector3 pos = Vector3.MoveTowards(posY, target.transform.position, speed * Time.deltaTime);
             rb.MovePosition(pos);
         }
+        StartCoroutine(DieAfterDelay(4.0f));
     }
     public void FlipThisSprite()
     {
@@ -41,15 +48,39 @@ public class SlimeClone : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         target = null;
-        health++;
-        Debug.Log("Mau bi tru:" + health);
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Stats playerStats = collision.collider.GetComponent<Stats>();
+            if (playerStats != null && stats != null)
+            {
+                playerStats.TakeDamage(stats.damage);
+            }
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
             FlipThisSprite();
         }
+            
+    }
+    public void OnDeath(Stats stats)
+    {
+        
+    }
+    private IEnumerator DieAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Die();
+    }
+    void Die()
+    {
+        // Sinh Particle System tại vị trí của kẻ địch
+        Instantiate(deathParticlePrefab, transform.position, Quaternion.identity);
+
+        // Hủy kẻ địch
+        Destroy(gameObject);
     }
 }
 

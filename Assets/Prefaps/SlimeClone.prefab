@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 1470109737512726512}
   - component: {fileID: 1694465571345291510}
   - component: {fileID: 6459526497997405791}
+  - component: {fileID: 2528546162533976194}
   m_Layer: 0
   m_Name: SlimeClone
   m_TagString: Untagged
@@ -214,10 +215,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -262,7 +263,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b385351ad7abbe4187af7bdd905bbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 40
+  deathParticlePrefab: {fileID: 158480031196400976, guid: 36402d84169be2c4c9f189be4fdf3d2f, type: 3}
+--- !u!114 &2528546162533976194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5585862519238838531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bad48282cb5b754ba51dd88bdb2ade6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heath: 0
+  maxHeath: 0
+  damage: 5
+  exp: 0
+  lv: 0
+  maxExp: 0
+  lvDmg: 0
+  lvHeath: 0
+  lvExp: 0
 --- !u!1 &8487991930875777989
 GameObject:
   m_ObjectHideFlags: 0
