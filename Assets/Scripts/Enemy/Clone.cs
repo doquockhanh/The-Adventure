@@ -11,6 +11,7 @@ public class SlimeClone : MonoBehaviour
     private GameObject target;
     private Stats stats;
     public GameObject deathParticlePrefab;
+    private float lifeTime = 2f;
 
     void Start()
     {
@@ -63,11 +64,11 @@ public class SlimeClone : MonoBehaviour
         {
             FlipThisSprite();
         }
-            
+
     }
     public void OnDeath(Stats stats)
     {
-        
+
     }
     private IEnumerator DieAfterDelay(float delay)
     {
@@ -77,8 +78,8 @@ public class SlimeClone : MonoBehaviour
     void Die()
     {
         // Sinh Particle System tại vị trí của kẻ địch
-        Instantiate(deathParticlePrefab, transform.position, Quaternion.identity);
-
+        GameObject Clone = Instantiate(deathParticlePrefab, transform.position, Quaternion.identity);
+        Destroy(Clone, lifeTime);
         // Hủy kẻ địch
         Destroy(gameObject);
     }
