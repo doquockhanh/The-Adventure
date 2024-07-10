@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 enum SlimeStatus
@@ -11,29 +12,38 @@ enum SlimeStatus
 public class SlimeController : MonoBehaviour
 {
     public float speed = 3f;
+    public float speedMini = 5f;
     public float followDistance = 10f;
     public bool canFollow = true;
     public bool isSelfDestroy = false;
-    public float destroyAfter = 5f;
+    public float destroyAfter = 4f;
     public float movingRange = 5f;
     private SlimeStatus status = SlimeStatus.moving;
     private GameObject player;
     private float initPosition;
     private bool isMovingRight = true;
+    private Stats stats;
+    public GameObject slimeMiniPrefab;
+    
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(CheckFollow());
         if (isSelfDestroy)
         {
-            Destroy(gameObject, destroyAfter);
+            Destroy();
         }
         initPosition = transform.position.x;
+        if (TryGetComponent(out stats))
+        {
+            stats.OnDeath += OnDeath;
+        }
     }
 
     void FixedUpdate()
     {
-         switch (status)
+        switch (status)
         {
             case SlimeStatus.idle:
                 {
@@ -56,9 +66,13 @@ public class SlimeController : MonoBehaviour
     private void Follow()
     {
         Vector2 playerPosition = player.transform.position;
-        Vector2 moveToPlayer = Vector2.MoveTowards(transform.position, playerPosition, speed * Time.fixedDeltaTime);
+        Vector2 moveToPlayer = Vector2.MoveTowards(transform.position, playerPosition, speedMini * Time.fixedDeltaTime);
         transform.position = moveToPlayer;
         FlipToTarget(player.transform);
+    }
+    private void Destroy()
+    {
+
     }
 
     private void Moving()
@@ -69,9 +83,11 @@ public class SlimeController : MonoBehaviour
             {
                 transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
             }
-            float moveX = speed  * Time.fixedDeltaTime;
+            float moveX = speed * Time.fixedDeltaTime;
             transform.position = new Vector3(transform.position.x + moveX, transform.position.y, transform.position.z);
-        }else {
+        }
+        else
+        {
             if (transform.localScale.x > 0)
             {
                 transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
@@ -91,11 +107,18 @@ public class SlimeController : MonoBehaviour
 
     void FlipToTarget(Transform target)
     {
-        if(transform.localScale.x > 0 && target.position.x < transform.position.x 
+        if (transform.localScale.x > 0 && target.position.x < transform.position.x
             || transform.localScale.x < 0 && target.position.x > transform.position.x)
         {
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
+    }
+
+    public void OnDeath(Stats stats)
+    {
+        Destroy(gameObject.GetComponent<Stats>());
+        Destroy(gameObject);
+        SpawnMiniSlime();
     }
 
     IEnumerator CheckFollow()
@@ -103,15 +126,37 @@ public class SlimeController : MonoBehaviour
         while (true)
         {
             float distance = Vector2.Distance(transform.position, player.transform.position);
-            if(canFollow && distance <= followDistance)
+            if (canFollow && distance <= followDistance)
             {
                 status = SlimeStatus.follow;
-            }else
+            }
+            else
             {
                 status = SlimeStatus.moving;
             }
             yield return new WaitForSeconds(2f);
         }
     }
-    
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Stats playerStats = other.collider.GetComponent<Stats>();
+            if (playerStats != null && stats != null)
+            {
+                playerStats.TakeDamage(stats.damage);
+            }
+        }
+    }
+
+    private void SpawnMiniSlime()
+    {
+        int numberOfEnemiesToSpawn = 3;
+        for (int i = 0; i < numberOfEnemiesToSpawn; i++)
+        {
+            Vector3 spawnPosition = transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
+            Instantiate(slimeMiniPrefab, spawnPosition, Quaternion.identity);
+        }
+    }
 }
