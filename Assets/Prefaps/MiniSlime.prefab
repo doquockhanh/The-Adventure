@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 2979253753869821530}
   - component: {fileID: 816793395855650115}
   - component: {fileID: 8265689076769445565}
-  - component: {fileID: 2804185190562264945}
-  - component: {fileID: 9109436480203423391}
+  - component: {fileID: 4804305643764880524}
+  - component: {fileID: -1922636859669298284}
   m_Layer: 6
-  m_Name: Slime
+  m_Name: MiniSlime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.984, y: -0.284, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -158,7 +158,7 @@ MonoBehaviour:
   lvDmg: 0
   lvHeath: 0
   lvExp: 0
---- !u!114 &2804185190562264945
+--- !u!114 &4804305643764880524
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,8 +172,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   followDistance: 10
-  canFollow: 0
---- !u!60 &9109436480203423391
+  canFollow: 1
+  isSelfDestroy: 1
+  destroyAfter: 5
+  movingRange: 5
+--- !u!60 &-1922636859669298284
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -217,13 +220,13 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.21404517, y: 0.062197834}
-      - {x: -0.23725963, y: -0.18097521}
-      - {x: -0.36605084, y: -0.3128022}
+    - - {x: -0.109375, y: 0.125}
+      - {x: -0.359375, y: -0.09375}
+      - {x: -0.421875, y: -0.25}
       - {x: -0.421875, y: -0.53125}
       - {x: -0.390625, y: -0.59375}
-      - {x: 0.30658674, y: -0.597239}
-      - {x: 0.38668275, y: -0.4299177}
-      - {x: 0.29945755, y: -0.21207413}
-      - {x: 0.17855096, y: 0.03777477}
+      - {x: 0.453125, y: -0.59375}
+      - {x: 0.484375, y: -0.5625}
+      - {x: 0.484375, y: -0.15625}
+      - {x: 0.234375, y: 0.125}
   m_UseDelaunayMesh: 0
