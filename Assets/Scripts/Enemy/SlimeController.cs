@@ -33,7 +33,7 @@ public class SlimeController : MonoBehaviour
         if (isSelfDestroy)
         {
        
-        }
+    }
         initPosition = transform.position.x;
         if (TryGetComponent(out stats))
         {
@@ -129,14 +129,14 @@ public class SlimeController : MonoBehaviour
             if (canFollow && distance <= followDistance)
             {
                 status = SlimeStatus.follow;
-            }
+        }
             else
-            {
+        {
                 status = SlimeStatus.moving;
             }
             yield return new WaitForSeconds(2f);
         }
-    }
+        }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -144,7 +144,7 @@ public class SlimeController : MonoBehaviour
         {
             Stats playerStats = other.collider.GetComponent<Stats>();
             if (playerStats != null && stats != null)
-            {
+        {
                 playerStats.TakeDamage(stats.damage);
             }
         }
@@ -156,7 +156,7 @@ public class SlimeController : MonoBehaviour
         Debug.Log("SDsadas");
         int numberOfEnemiesToSpawn = 3;
         for (int i = 0; i < numberOfEnemiesToSpawn; i++)
-        {
+    {
             Vector3 spawnPosition = transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
             Instantiate(slimeMiniPrefab, spawnPosition, Quaternion.identity);
         }
