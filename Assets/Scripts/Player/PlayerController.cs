@@ -1,26 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Pool;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] public float speed;
     [SerializeField] private LayerMask groundPlayer;
-    [SerializeField] private LayerMask wallPlayer;
     public Rigidbody2D body;
     private Animator anim;
     private bool grounded;
     public float jump;
-    private BoxCollider2D boxCollider;
     private bool facingRight = true;
-    public GameObject questionMenuUI;
-    private bool isShowQuestion = false;
-    [SerializeField] public AudioClip walkSound;
-    public AudioSource audioSource;
     private Canvas baseCanvas;
     private GameObject blueTextPrefap;
     private GameObject redTextPrefap;
@@ -29,8 +18,6 @@ public class PlayerController : MonoBehaviour
     {
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        boxCollider = GetComponent<BoxCollider2D>();
-        ResumeGame();
         GetComponent<Stats>().OnGetExp += OnGetExp;
         GetComponent<Stats>().OnTakeDamage += OnTakeDamage;
         GetComponent<Stats>().OnDeath += OnDie;
@@ -62,17 +49,8 @@ public class PlayerController : MonoBehaviour
             facingRight = !facingRight;
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
-
-        if (horizontalInput != 0 && grounded && !audioSource.isPlaying)
-        {
-            audioSource.clip = walkSound;
-            audioSource.Play();
-        }
-        else if (horizontalInput == 0 || !grounded)
-        {
-            audioSource.Stop();
-        }
     }
+
     private void Jump()
     {
         body.velocity = new Vector2(body.velocity.x, jump);
@@ -91,45 +69,6 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene(2);
         }
     }
-    public bool isGrounded()
-    {
-        RaycastHit2D raycasthit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, groundPlayer);
-        return raycasthit.collider != null;
-    }
-    private bool onWall()
-    {
-        RaycastHit2D raycasthit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, new Vector2(transform.localScale.x, 0), 0.1f, wallPlayer);
-        return raycasthit.collider != null;
-    }
-    public bool canAttack()
-    {
-        return true;
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("NPC"))
-        {
-
-
-            ShowQuestion();
-
-        }
-
-    }
-    void ShowQuestion()
-    {
-
-        questionMenuUI.SetActive(true);
-        Time.timeScale = 1f;
-        isShowQuestion = true;
-    }
-    public void ResumeGame()
-    {
-
-        questionMenuUI.SetActive(false);
-        Time.timeScale = 1f;
-        isShowQuestion = false;
-    }
 
     public void OnLevelUp()
     {
@@ -139,7 +78,8 @@ public class PlayerController : MonoBehaviour
     public void OnDie(Stats stats)
     {
         Debug.Log("die");
-        Destroy(gameObject);
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.name);
     }
 
     public void OnGetExp(float exp)

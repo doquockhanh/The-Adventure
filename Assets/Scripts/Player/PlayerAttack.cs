@@ -7,7 +7,6 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     private Animator anim;
-    private PlayerController playerMovement;
     public GameObject attackArea;
     private bool attacking = false;
     private float timeToAttack = 1f;
@@ -33,21 +32,13 @@ public class PlayerAttack : MonoBehaviour
         {
             Debug.LogError("Không tìm thấy Animator.");
         }
-
-        playerMovement = GetComponent<PlayerController>();
-        if (playerMovement == null)
-        {
-            Debug.LogError("Không tìm thấy PlayerController.");
-        }
-
     }
 
     private void Update()
     {
-        if (Input.GetMouseButton(0) && playerMovement != null && playerMovement.canAttack())
+        if (Input.GetMouseButton(0))
         {
             Attack();
-
         }
 
         if (attacking)
