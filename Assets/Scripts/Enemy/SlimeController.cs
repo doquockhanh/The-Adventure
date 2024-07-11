@@ -32,7 +32,7 @@ public class SlimeController : MonoBehaviour
         StartCoroutine(CheckFollow());
         if (isSelfDestroy)
         {
-            Destroy();
+       
         }
         initPosition = transform.position.x;
         if (TryGetComponent(out stats))
@@ -69,10 +69,6 @@ public class SlimeController : MonoBehaviour
         Vector2 moveToPlayer = Vector2.MoveTowards(transform.position, playerPosition, speedMini * Time.fixedDeltaTime);
         transform.position = moveToPlayer;
         FlipToTarget(player.transform);
-    }
-    private void Destroy()
-    {
-
     }
 
     private void Moving()
@@ -113,12 +109,16 @@ public class SlimeController : MonoBehaviour
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
     }
-
+    void Destroy()
+    {
+        Destroy(gameObject);
+        StartCoroutine(SpawnMiniSlime());
+    }
     public void OnDeath(Stats stats)
     {
         Destroy(gameObject.GetComponent<Stats>());
-        Destroy(gameObject);
-        SpawnMiniSlime();
+       
+        Destroy();
     }
 
     IEnumerator CheckFollow()
@@ -150,8 +150,10 @@ public class SlimeController : MonoBehaviour
         }
     }
 
-    private void SpawnMiniSlime()
+    IEnumerator SpawnMiniSlime()
     {
+        yield return new WaitForSeconds(2f);
+        Debug.Log("SDsadas");
         int numberOfEnemiesToSpawn = 3;
         for (int i = 0; i < numberOfEnemiesToSpawn; i++)
         {

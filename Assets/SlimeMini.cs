@@ -9,7 +9,6 @@ public class SlimeMini : MonoBehaviour
     public float destroyAfter = 4f;
     void Start()
     {
-        StartCoroutine(CheckFollow());
     }
 
     // Update is called once per frame
@@ -17,10 +16,12 @@ public class SlimeMini : MonoBehaviour
     {
         
     }
-    IEnumerator CheckFollow()
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        yield return new WaitForSeconds(4f);
-        Instantiate(particlePrefab, transform.position, transform.rotation);
-        Destroy(gameObject);
+        if(other.gameObject.CompareTag("Player"))
+        {
+            Instantiate(particlePrefab, transform.position, transform.rotation);
+            Destroy(gameObject);
+        }
     }
 }
