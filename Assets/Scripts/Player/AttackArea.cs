@@ -6,6 +6,11 @@ using UnityEngine;
 public class AttackArea : MonoBehaviour
 {
     public AudioClip Sound;
+    private Animator anim;
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
     
@@ -25,10 +30,13 @@ public class AttackArea : MonoBehaviour
 
         Stats PlayerStats = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<Stats>();
         Stats EnemyStats = collision.collider.GetComponent<Stats>();
-        if (EnemyStats != null && PlayerStats != null)
+        if (collision.collider.CompareTag("Enemy"))
         {
-            EnemyStats.TakeDamage(PlayerStats.damage);
+            if (EnemyStats != null && PlayerStats != null)
+            {
+                EnemyStats.TakeDamage(PlayerStats.damage);
 
+            }
         }
         
     }
