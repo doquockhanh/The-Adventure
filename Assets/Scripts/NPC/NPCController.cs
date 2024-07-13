@@ -39,6 +39,7 @@ public class NPCController : MonoBehaviour
                 if (quest1ems > checkq1ems)
                 {
                     quest1.EnemyKilled(quest1ems - checkq1ems);
+                    quest1ems = checkq1ems;
                 }
             }
 
@@ -48,6 +49,7 @@ public class NPCController : MonoBehaviour
                 if (quest2ems > checkq2ems)
                 {
                     quest2.EnemyKilled(quest2ems - checkq2ems);
+                    quest2ems = checkq2ems;
                 }
             }
             if (quest3.IsCompleted == false)
@@ -56,6 +58,7 @@ public class NPCController : MonoBehaviour
                 if (quest3ems > checkq3ems)
                 {
                     quest3.EnemyKilled(quest3ems - checkq3ems);
+                    quest3ems = checkq3ems;
                 }
             }
         }

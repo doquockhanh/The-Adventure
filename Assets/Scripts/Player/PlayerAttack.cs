@@ -38,7 +38,10 @@ public class PlayerAttack : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            Attack();
+            if (anim != null)
+            {
+                anim.SetTrigger("attack");
+            }
         }
 
         if (attacking)
@@ -53,12 +56,8 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    private void Attack()
+    public void Attack()
     {
-        if (anim != null)
-        {
-            anim.SetTrigger("attack");
-        }
         attacking = true;
         if (attackArea != null)
         {

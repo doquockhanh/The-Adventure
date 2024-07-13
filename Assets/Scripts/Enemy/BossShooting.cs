@@ -24,13 +24,14 @@ public class BossShooting : MonoBehaviour
         bossMoving = GetComponent<BossMoving>();
         anim.SetBool("Ismoving", true);
         rb = GetComponent<Rigidbody2D>();
-        PlayerDame= player.GetComponent<Stats>();
+        PlayerDame = player.GetComponent<Stats>();
+        transform.GetComponent<Stats>().OnDeath += Ondeath;
     }
 
     // Update is called once per frame
     public void Update()
     {
-        if (isDead) return; 
+        if (isDead) return;
 
         float distance = Vector2.Distance(transform.position, player.transform.position);
         if (distance < chase)
@@ -50,23 +51,14 @@ public class BossShooting : MonoBehaviour
         Instantiate(bullet, bulletPos.position, Quaternion.identity);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void Ondeath(Stats stats)
     {
-        Stats BossHealth = transform.GetComponent<Stats>();
-        
-        if (collision.collider.CompareTag("AttackArea"))
-        {
-            BossHealth.TakeDamage(PlayerDame.damage);
-           if(BossHealth.heath <=0)
-            {
-                anim.SetBool("Death", true);
-                isDead = true;
-                rb.velocity = Vector2.zero;
-                rb.isKinematic = true;
-                bossMoving.enabled = false;
-                this.enabled = false;
-                Destroy(gameObject, 2f);
-            }
-        }
+        anim.SetBool("Death", true);
+        isDead = true;
+        rb.velocity = Vector2.zero;
+        rb.isKinematic = true;
+        bossMoving.enabled = false;
+        this.enabled = false;
+        Destroy(gameObject, 2f);
     }
 }

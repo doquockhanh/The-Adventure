@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
 
         if (collision.collider.CompareTag("Finish"))
         {
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(1);
         }
     }
 
