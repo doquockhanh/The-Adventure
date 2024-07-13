@@ -7,6 +7,7 @@ public class QuestKill : Quest
 {
     public int EnemiesToKill { get; set; }
     public int EnemiesKilled { get; set; }
+    public int experience { get; set; }
     public event System.Action<QuestKill> OnKilled;
 
     public QuestKill(string name, int enemiesToKill)
@@ -15,9 +16,9 @@ public class QuestKill : Quest
         EnemiesToKill = enemiesToKill;
     }
 
-    public void EnemyKilled()
+    public void EnemyKilled(int count)
     {
-        EnemiesKilled++;
+        EnemiesKilled += count;
         CheckCompletion();
         OnKilled?.Invoke(this);
     }
