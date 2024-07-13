@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class TextController : MonoBehaviour
 {
+    public bool textFadeOut = true;
     public float duration = 2.5f;
     public float sizeScale = 1f;
     public string text = "default text";
@@ -14,7 +15,10 @@ public class TextController : MonoBehaviour
         Text textObject = GetComponent<Text>();
         textObject.text = text;
         textObject.transform.localScale = new Vector3(sizeScale, sizeScale, 0);
-        StartCoroutine(FadeOutAndDestroy(duration));
+        if (textFadeOut)
+        {
+            StartCoroutine(FadeOutAndDestroy(duration));
+        }
     }
 
     IEnumerator FadeOutAndDestroy(float duration)

@@ -21,4 +21,8 @@ public class QuestManager
             quest.CheckCompletion();
         }
     }
+
+    public List<Quest> getAllQuest() {
+        return quests;
+    }
 }
