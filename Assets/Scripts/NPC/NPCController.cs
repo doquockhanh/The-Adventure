@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NPCController : MonoBehaviour
 {
     public DialogManager dialogManager;
     private Canvas canvas;
     private bool asked = false;
-    private QuestManager taskManager;
+    private QuestManager questManager;
     private QuestKill quest1;
     private QuestKill quest2;
     private QuestKill quest3;
@@ -25,7 +26,7 @@ public class NPCController : MonoBehaviour
     void Start()
     {
         canvas = transform.Find("Canvas").GetComponent<Canvas>();
-        taskManager = GameObject.Find("QuestHolder").GetComponent<QuestManagerHolder>().questManager;
+        questManager = GameObject.Find("QuestHolder").GetComponent<QuestManagerHolder>().questManager;
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -70,7 +71,7 @@ public class NPCController : MonoBehaviour
         if (asked == false && other.CompareTag("Player"))
         {
             asked = true;
-            Destroy(canvas.gameObject.transform.Find("StartQuestBtn").gameObject);
+            canvas.gameObject.transform.Find("StartQuestBtn").gameObject.SetActive(false);
             dialogManager.StartDialog(canvas, dialog, AcceptQuest, DeclineQuest, 2f);
         }
     }
@@ -83,21 +84,25 @@ public class NPCController : MonoBehaviour
         quest1.OnKilled += OnKilled;
         quest1.experience = 50;
         quest1ems = FindGameObjectsWithNamePart("Eagle");
-        taskManager.AddQuest(quest1);
+        questManager.AddQuest(quest1);
         quest2 = new("Tieu diet 5 tho bien di", 5);
         quest2.OnKilled += OnKilled;
         quest2.experience = 30;
         quest2ems = FindGameObjectsWithNamePart("Bunny");
+         questManager.AddQuest(quest2);
         quest3 = new("Tieu diet 3 doi ien di", 3);
         quest3.OnKilled += OnKilled;
         quest3.experience = 30;
         quest3ems = FindGameObjectsWithNamePart("Bat");
+         questManager.AddQuest(quest3);
+        UpdateUi();
     }
 
     void DeclineQuest()
     {
         Debug.Log("Quest Declined!");
         asked = false;
+        canvas.gameObject.transform.Find("StartQuestBtn").gameObject.SetActive(true);
     }
 
     private void OnKilled(QuestKill quest)
@@ -106,7 +111,22 @@ public class NPCController : MonoBehaviour
         {
             player.GetComponent<Stats>().SetExp(quest.experience);
         }
-        Debug.Log("Update in UI");
+        UpdateUi();
+    }
+
+    private void UpdateUi()
+    {
+        List<Quest> quests = questManager.getAllQuest();
+        Debug.Log(quests.Count);
+        string text = "";
+        foreach (Quest _q in quests)
+        {
+            QuestKill qk = _q as QuestKill;
+            Debug.Log(qk.IsCompleted);
+            if (qk.IsCompleted == false)
+                text += $"- {qk.QuestName} ({qk.EnemiesKilled}/{qk.EnemiesToKill})\n";
+        }
+        player.GetComponentInChildren<GetPlayerInfo>().UpdateMissionText(text);
     }
 
     public int FindGameObjectsWithNamePart(string namePart)
