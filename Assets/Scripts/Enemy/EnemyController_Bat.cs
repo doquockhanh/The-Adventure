@@ -26,7 +26,7 @@ public class EnemyController_Bat : MonoBehaviour
     }
     private void FixedUpdate()
     {
-    if(Vector2.Distance(transform.position, player.transform.position) <= chaseRange) 
+    if(Vector2.Distance(transform.position, player.transform.position) <= chaseRange)
         { 
             ChasePlayer();
         }
