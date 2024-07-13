@@ -80,17 +80,17 @@ public class NPCController : MonoBehaviour
     {
         Debug.Log("Quest Accepted!");
         questAccepted = true;
-        quest1 = new("Tieu diet 5 dai bang bien di", 5);
+        quest1 = new("Tieu diet 1 dai bang bien di", 1);
         quest1.OnKilled += OnKilled;
         quest1.experience = 50;
         quest1ems = FindGameObjectsWithNamePart("Eagle");
         questManager.AddQuest(quest1);
-        quest2 = new("Tieu diet 5 tho bien di", 5);
+        quest2 = new("Tieu diet 2 tho bien di", 2);
         quest2.OnKilled += OnKilled;
         quest2.experience = 30;
         quest2ems = FindGameObjectsWithNamePart("Bunny");
          questManager.AddQuest(quest2);
-        quest3 = new("Tieu diet 3 doi ien di", 3);
+        quest3 = new("Tieu diet 3 doi bien di", 3);
         quest3.OnKilled += OnKilled;
         quest3.experience = 30;
         quest3ems = FindGameObjectsWithNamePart("Bat");
