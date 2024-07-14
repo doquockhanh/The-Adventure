@@ -18,7 +18,6 @@ public class NPCController : MonoBehaviour
     private bool questAccepted = false;
     private List<string> dialog = new List<string>
     {
-        "XIN CHAO NHA THAM HIEM ABC. TOI DA CHO BAN RAT LAU O DAY",
         "HAY GIUP TOI TIEU DIET QUAI VAT DE MANG LAI BINH YEN CHO VUNG DAT NAY",
         "BAN CO DONG Y THU THACH NAY KHONG?"
     };
