@@ -16,7 +16,6 @@ public class SlimeController : MonoBehaviour
     public float followDistance = 10f;
     public bool canFollow = true;
     public bool isSelfDestroy = false;
-    public float destroyAfter = 4f;
     public float movingRange = 5f;
     private SlimeStatus status = SlimeStatus.moving;
     private GameObject player;
@@ -33,7 +32,7 @@ public class SlimeController : MonoBehaviour
         if (isSelfDestroy)
         {
        
-    }
+        }
         initPosition = transform.position.x;
         if (TryGetComponent(out stats))
         {
@@ -109,16 +108,17 @@ public class SlimeController : MonoBehaviour
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
     }
+    public void OnDeath(Stats stats)
+    {
+        Destroy(gameObject.GetComponent<Stats>());
+        StopAllCoroutines();
+        Destroy(gameObject, 2f);
+
+    }
     void Destroy()
     {
         Destroy(gameObject);
         StartCoroutine(SpawnMiniSlime());
-    }
-    public void OnDeath(Stats stats)
-    {
-        Destroy(gameObject.GetComponent<Stats>());
-       
-        Destroy();
     }
 
     IEnumerator CheckFollow()
