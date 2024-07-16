@@ -12,6 +12,7 @@ TagManager:
   - Boss
   - AttackArea
   - Ladder
+  - Boss2
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Water
   - UI
   - slime
-  - 
+  - Player
   - 
   - 
   - 
