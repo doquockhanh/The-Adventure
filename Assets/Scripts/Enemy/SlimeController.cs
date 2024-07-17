@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
@@ -60,13 +61,13 @@ public class SlimeController : MonoBehaviour
     }
 
     private void Moving()
-    {
+        {
         if (isMovingRight)
         {
             if (transform.localScale.x < 0)
             {
                 transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-            }
+        }
             float moveX = speed * Time.fixedDeltaTime;
             transform.position = new Vector3(transform.position.x + moveX, transform.position.y, transform.position.z);
         }
@@ -79,10 +80,10 @@ public class SlimeController : MonoBehaviour
             float moveX = speed * Time.fixedDeltaTime;
             transform.position = new Vector3(transform.position.x - moveX, transform.position.y, transform.position.z);
         }
-    }
+        }
 
     void CheckMoveOutRange()
-    {
+        {
         if (transform.position.x > initPosition + movingRange || transform.position.x < initPosition - movingRange)
         {
             isMovingRight = transform.position.x < initPosition;
@@ -93,7 +94,7 @@ public class SlimeController : MonoBehaviour
     {
         if (transform.localScale.x > 0 && target.position.x < transform.position.x
             || transform.localScale.x < 0 && target.position.x > transform.position.x)
-        {
+    {
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
     }
@@ -108,7 +109,7 @@ public class SlimeController : MonoBehaviour
     {
         int numberOfEnemiesToSpawn = 3;
         for (int i = 0; i < numberOfEnemiesToSpawn; i++)
-        {
+    {
             Vector3 spawnPosition = transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
             Instantiate(slimeMiniPrefab, spawnPosition, Quaternion.identity);
         }
@@ -124,7 +125,7 @@ public class SlimeController : MonoBehaviour
                 status = SlimeStatus.follow;
             }
             else
-            {
+        {
                 status = SlimeStatus.moving;
             }
             yield return new WaitForSeconds(2f);
