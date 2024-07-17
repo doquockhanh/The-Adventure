@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
@@ -71,7 +72,7 @@ public class SlimeController : MonoBehaviour
     }
 
     private void Moving()
-    {
+        {
         if (isMovingRight)
         {
             if (transform.localScale.x < 0)
@@ -90,7 +91,7 @@ public class SlimeController : MonoBehaviour
             float moveX = speed * Time.fixedDeltaTime;
             transform.position = new Vector3(transform.position.x - moveX, transform.position.y, transform.position.z);
         }
-    }
+        }
 
     void CheckMoveOutRange()
     {
@@ -98,7 +99,7 @@ public class SlimeController : MonoBehaviour
         {
             isMovingRight = transform.position.x < initPosition;
         }
-    }
+        }
 
     void FlipToTarget(Transform target)
     {
@@ -127,7 +128,7 @@ public class SlimeController : MonoBehaviour
         {
             float distance = Vector2.Distance(transform.position, player.transform.position);
             if (canFollow && distance <= followDistance)
-            {
+    {
                 status = SlimeStatus.follow;
         }
             else
@@ -136,7 +137,7 @@ public class SlimeController : MonoBehaviour
             }
             yield return new WaitForSeconds(2f);
         }
-        }
+    }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -144,7 +145,7 @@ public class SlimeController : MonoBehaviour
         {
             Stats playerStats = other.collider.GetComponent<Stats>();
             if (playerStats != null && stats != null)
-        {
+            {
                 playerStats.TakeDamage(stats.damage);
             }
         }
