@@ -144,7 +144,7 @@ public class SlimeController : MonoBehaviour
         {
             Stats playerStats = other.collider.GetComponent<Stats>();
             if (playerStats != null && stats != null)
-        {
+            {
                 playerStats.TakeDamage(stats.damage);
             }
         }
