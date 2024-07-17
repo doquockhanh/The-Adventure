@@ -1,39 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEditor;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
 
-    [SerializeField] float moveSpeed = 3f; 
-    Rigidbody2D myRigidbody; 
-    Animator anim; 
+    public float speed = 3f;
+    private Rigidbody2D myRigidbody; 
+    private Animator anim; 
+    
 
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>(); 
-        anim = GetComponent<Animator>(); 
+        anim = GetComponent<Animator>();
+        gameObject.GetComponent<Stats>().OnDeath += EnemyDie;
         FlipDirection(); 
+
     }
 
     void Update()
     {
-        myRigidbody.velocity = new Vector2(moveSpeed, 0f); 
+        myRigidbody.velocity = new Vector2(speed, 0f); 
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
         if (collision.gameObject.CompareTag("Waypoint"))
         {
-            FlipDirection(); 
+            FlipDirection();
         }
     }
 
     void FlipDirection()
     {
-        moveSpeed = -moveSpeed; 
+        speed = -speed; 
         FlipEnemyFacing(); 
     }
 
@@ -41,7 +44,12 @@ public class EnemyMovement : MonoBehaviour
     {
         transform.localScale = new Vector2(-(Mathf.Sign(myRigidbody.velocity.x)), 1f);
     }
+    public void EnemyDie(Stats stats)
+    {
+        Destroy(gameObject);
+    }
 
+    
 }
 
    

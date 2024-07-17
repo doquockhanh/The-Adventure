@@ -56,11 +56,11 @@ TagManager:
   - name: Round
     uniqueID: 2030106445
     locked: 0
-  - name: Box
-    uniqueID: 1869441411
-    locked: 0
   - name: Enemy
     uniqueID: 787853409
+    locked: 0
+  - name: Box
+    uniqueID: 1869441411
     locked: 0
   - name: Player
     uniqueID: 1833246757
