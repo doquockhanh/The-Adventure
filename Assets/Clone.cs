@@ -42,7 +42,6 @@ public class SlimeClone : MonoBehaviour
     {
         target = null;
         health++;
-        Debug.Log("Mau bi tru:" + health);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
