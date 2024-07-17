@@ -32,9 +32,9 @@ public class Boss2Weapon : MonoBehaviour
                 PlayerHealth.TakeDamage(BossDame.damage);
             }
         }
-        if(BossDame.heath <= helathToEnraged)
+        if(BossDame.heath <= 0)
         {
-            GetComponent<Animator>().SetBool("ISEnraged", true);
+            Destroy(gameObject, 2f);
         }
 
 

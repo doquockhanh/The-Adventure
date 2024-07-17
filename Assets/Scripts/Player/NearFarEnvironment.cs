@@ -23,7 +23,7 @@ public class NearFarEnvironment : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (diffPos.Count == 0)
         {
