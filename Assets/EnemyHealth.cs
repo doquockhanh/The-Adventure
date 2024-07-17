@@ -1,9 +1,12 @@
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using System.Collections;
 
 public class EnemyHealth : MonoBehaviour
 {
     public GameObject enemyPrefab;
     public GameObject sprite;
+    private Stats stats;
     void Start()
     {
     
@@ -12,20 +15,23 @@ public class EnemyHealth : MonoBehaviour
     {
         
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.CompareTag("Player"))
+        if(collision.transform.CompareTag("Player"))
         {
-            Die();
+            Stats playerStats = collision.collider.GetComponent<Stats>();
+            if (playerStats != null && stats != null)
+            {
+                playerStats.TakeDamage(stats.damage);
+            }
         }
     }
 
     void Die()
     {
         SpawnEnemies();
-        Destroy(gameObject);
     }
-    void SpawnEnemies()
+     public void SpawnEnemies()
     {
         int numberOfEnemiesToSpawn = 2;
         float randomX = transform.position.x - 1;

@@ -13,7 +13,15 @@ public class AttackArea : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-    
+        if (collision.CompareTag("Enemy"))
+            {
+            Destroy(collision.gameObject);
+            EnemyHealth enemy = collision.GetComponent<EnemyHealth>();
+            if (enemy != null)
+            {
+                enemy.SpawnEnemies();
+            }
+        }
         Stats PlayerStats = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<Stats>();
         Stats EnemyStats = collision.GetComponent<Stats>();
         if(EnemyStats != null && PlayerStats !=null )
@@ -51,6 +59,7 @@ public class AttackArea : MonoBehaviour
 
         Destroy(tempGO, Sound.length);
     }
+    
 
     
 }
