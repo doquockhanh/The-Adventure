@@ -268,8 +268,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bad48282cb5b754ba51dd88bdb2ade6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heath: 20
-  maxHeath: 20
+  heath: 100
+  maxHeath: 100
   damage: 5
   exp: 0
   lv: 0
