@@ -42,7 +42,7 @@ public class TriggerLoop : MonoBehaviour
             while (collider.CompareTag("Player") && playerStats != null && stats != null)
             {
                 playerStats.TakeDamage(stats.damage);
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(0.5f);
             }
 
             isTriggering = false;
