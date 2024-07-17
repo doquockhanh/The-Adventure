@@ -11,9 +11,9 @@ public class EnemyController_Bat : MonoBehaviour
     public float speed;
     private float speedOriginal;
     public float chaseSpeed = 6;
-    public float chaseRange = 10f;
+    public float chaseRange;
     public float exp = 1f;
-    private float originalChaseRange = 10f;
+    private float originalChaseRange;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();

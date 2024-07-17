@@ -23,16 +23,11 @@ public class SlimeController : MonoBehaviour
     private bool isMovingRight = true;
     private Stats stats;
     public GameObject slimeMiniPrefab;
-    
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(CheckFollow());
-        if (isSelfDestroy)
-        {
-       
-        }
         initPosition = transform.position.x;
         if (TryGetComponent(out stats))
         {
@@ -45,20 +40,14 @@ public class SlimeController : MonoBehaviour
         switch (status)
         {
             case SlimeStatus.idle:
-                {
-                    break;
-                }
+                break;
             case SlimeStatus.follow:
-                {
-                    Follow();
-                    break;
-                }
+                Follow();
+                break;
             case SlimeStatus.moving:
-                {
-                    CheckMoveOutRange();
-                    Moving();
-                    break;
-                }
+                CheckMoveOutRange();
+                Moving();
+                break;
         }
     }
 
@@ -108,17 +97,21 @@ public class SlimeController : MonoBehaviour
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         }
     }
+
     public void OnDeath(Stats stats)
     {
-        Destroy(gameObject.GetComponent<Stats>());
-        StopAllCoroutines();
-        Destroy(gameObject, 2f);
-
+        
+        StartCoroutine(DelaySpawn());
     }
-    void Destroy()
+
+    void SpawnMiniSlime()
     {
-        Destroy(gameObject);
-        StartCoroutine(SpawnMiniSlime());
+        int numberOfEnemiesToSpawn = 3;
+        for (int i = 0; i < numberOfEnemiesToSpawn; i++)
+        {
+            Vector3 spawnPosition = transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
+            Instantiate(slimeMiniPrefab, spawnPosition, Quaternion.identity);
+        }
     }
 
     IEnumerator CheckFollow()
@@ -129,14 +122,14 @@ public class SlimeController : MonoBehaviour
             if (canFollow && distance <= followDistance)
             {
                 status = SlimeStatus.follow;
-        }
+            }
             else
-        {
+            {
                 status = SlimeStatus.moving;
             }
             yield return new WaitForSeconds(2f);
         }
-        }
+    }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -144,21 +137,17 @@ public class SlimeController : MonoBehaviour
         {
             Stats playerStats = other.collider.GetComponent<Stats>();
             if (playerStats != null && stats != null)
-        {
+            {
                 playerStats.TakeDamage(stats.damage);
             }
         }
     }
 
-    IEnumerator SpawnMiniSlime()
+    IEnumerator DelaySpawn()
     {
         yield return new WaitForSeconds(2f);
-        Debug.Log("SDsadas");
-        int numberOfEnemiesToSpawn = 3;
-        for (int i = 0; i < numberOfEnemiesToSpawn; i++)
-    {
-            Vector3 spawnPosition = transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
-            Instantiate(slimeMiniPrefab, spawnPosition, Quaternion.identity);
-        }
+        Destroy(gameObject);
+        SpawnMiniSlime();
+        
     }
 }
