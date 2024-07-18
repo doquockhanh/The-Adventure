@@ -78,8 +78,11 @@ public class PlayerController : MonoBehaviour
     public void OnDie(Stats stats)
     {
         Debug.Log("die");
-        Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.name);
+        PauseMenu pauseMenu = GameObject.FindGameObjectWithTag("pauseMenu").GetComponent<PauseMenu>();
+        pauseMenu.title = "You're Dead!" ;
+        pauseMenu.haveResumeOption = false;
+        pauseMenu.canEsc = false;
+        pauseMenu.PauseGame();
     }
 
     public void OnGetExp(float exp)
