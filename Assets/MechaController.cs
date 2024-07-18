@@ -16,7 +16,7 @@ public class MechaController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
+        
     }
     void SpawnBullet()
     {
