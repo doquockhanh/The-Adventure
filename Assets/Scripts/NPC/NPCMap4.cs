@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NPCController : MonoBehaviour
+public class NPCMap4 : MonoBehaviour
 {
     public DialogManager dialogManager;
     private Canvas canvas;

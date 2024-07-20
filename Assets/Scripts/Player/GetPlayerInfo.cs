@@ -17,12 +17,18 @@ public class GetPlayerInfo : MonoBehaviour
     public Text hpText;
     public Text expText;
     public Text missionText;
+    public Text sceneText;
+    public int currentScene;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         stats = player.GetComponent<Stats>();
         hpSlider = transform.GetComponentsInChildren<Slider>()[0];
         expSlider = transform.GetComponentsInChildren<Slider>()[1];
+        if (sceneText)
+        {
+            sceneText.text = $"Lv {currentScene}";
+        }
     }
 
     void FixedUpdate()
@@ -49,7 +55,8 @@ public class GetPlayerInfo : MonoBehaviour
         }
     }
 
-    public void UpdateMissionText(string text) {
+    public void UpdateMissionText(string text)
+    {
         missionText.text = text;
     }
 }
