@@ -63,11 +63,6 @@ public class PlayerController : MonoBehaviour
         {
             grounded = true;
         }
-
-        if (collision.collider.CompareTag("Finish"))
-        {
-            SceneManager.LoadScene(1);
-        }
     }
 
     public void OnLevelUp()
