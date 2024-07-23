@@ -16,10 +16,8 @@ public class FinishPointController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-         Debug.Log("adijha");
         if (other.CompareTag("Player"))
         {
-            Debug.Log("abc");
             PauseGame();
         }
     }

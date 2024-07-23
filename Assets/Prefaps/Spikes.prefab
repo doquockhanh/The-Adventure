@@ -146,7 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heath: 0
   maxHeath: 0
-  damage: 1000
+  damage: 100
   exp: 0
   lv: 0
   maxExp: 0
