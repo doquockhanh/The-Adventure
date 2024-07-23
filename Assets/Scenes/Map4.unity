@@ -29807,6 +29807,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 3424566935614769740, guid: 49a041f91bdcf0a46b779ff24311aa49, type: 3}
+      propertyPath: currentScene
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3627910950811453840, guid: 49a041f91bdcf0a46b779ff24311aa49, type: 3}
       propertyPath: boundingBox
       value: 
