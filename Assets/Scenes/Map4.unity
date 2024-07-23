@@ -34005,6 +34005,10 @@ PrefabInstance:
       propertyPath: winPanel
       value: 
       objectReference: {fileID: 338462460}
+    - target: {fileID: 1394749517782858094, guid: 1794a6844108d014a9dc48b035262873, type: 3}
+      propertyPath: indexNextLevel
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1626584164195088814, guid: 1794a6844108d014a9dc48b035262873, type: 3}
       propertyPath: m_Name
       value: FinishPoint

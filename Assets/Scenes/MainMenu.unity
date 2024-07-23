@@ -808,7 +808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe94c00885896b6419bbc32646d1176f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startScene: 4
+  startScene: 1
 --- !u!4 &566148636
 Transform:
   m_ObjectHideFlags: 0
