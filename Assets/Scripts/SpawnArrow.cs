@@ -5,11 +5,11 @@ using UnityEngine;
 public class SpawnArrow : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject arrowPrefab;
+    public GameObject[] arrowPrefab;
     public Transform posSpawn;
     void Start()
     {
-        InvokeRepeating("Spawn", 1, 1.5f);
+        InvokeRepeating("Spawn", 0, 0.9f);
     }
 
     // Update is called once per frame
@@ -19,6 +19,7 @@ public class SpawnArrow : MonoBehaviour
     }
     void Spawn()
     {
-        Instantiate(arrowPrefab, posSpawn.position, Quaternion.identity);
+        int RandomArrow = Random.Range(0, arrowPrefab.Length);
+        Instantiate(arrowPrefab[RandomArrow], posSpawn.position, Quaternion.identity);
     }
 }
