@@ -68,7 +68,7 @@ public class NPCMap3 : MonoBehaviour
                 int checkq4ems = FindGameObjectsWithNamePart("Slime");
                 if (quest4ems > checkq4ems)
                 {
-                    quest4.EnemyKilled(quest3ems - checkq4ems);
+                    quest4.EnemyKilled(quest4ems - checkq4ems);
                     quest4ems = checkq4ems;
                 }
             }

@@ -28613,6 +28613,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5385456180951856163, guid: 33d4776bcf09f0641b41d191aa746117, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5385456180951856163, guid: 33d4776bcf09f0641b41d191aa746117, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5385456180951856163, guid: 33d4776bcf09f0641b41d191aa746117, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5385456180951856163, guid: 33d4776bcf09f0641b41d191aa746117, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5720791356890676665, guid: 33d4776bcf09f0641b41d191aa746117, type: 3}
       propertyPath: m_Name
       value: WinPanel
@@ -28644,6 +28660,13 @@ PrefabInstance:
     - target: {fileID: 7601009217849589473, guid: 33d4776bcf09f0641b41d191aa746117, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7913970802733107439, guid: 33d4776bcf09f0641b41d191aa746117, type: 3}
+      propertyPath: m_Text
+      value: 'Chuc mung ban da chien thang
+
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 8103752758718310111, guid: 33d4776bcf09f0641b41d191aa746117, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -29719,6 +29742,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1745812415914707395, guid: 49a041f91bdcf0a46b779ff24311aa49, type: 3}
+      propertyPath: heath
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: -1745812415914707395, guid: 49a041f91bdcf0a46b779ff24311aa49, type: 3}
+      propertyPath: maxHeath
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 320040645503636504, guid: 49a041f91bdcf0a46b779ff24311aa49, type: 3}
       propertyPath: m_Layer
       value: 7
