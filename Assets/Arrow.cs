@@ -6,8 +6,6 @@ public class Arrow : MonoBehaviour
 {
     // Start is called before the first frame update
     private Stats stats;
-    private Coroutine triggerCoroutine;
-    private bool isTriggering = false ;
     public float speedArrow;
     void Start()
     {
