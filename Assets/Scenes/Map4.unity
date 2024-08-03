@@ -29744,11 +29744,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -1745812415914707395, guid: 49a041f91bdcf0a46b779ff24311aa49, type: 3}
       propertyPath: heath
-      value: 50
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: -1745812415914707395, guid: 49a041f91bdcf0a46b779ff24311aa49, type: 3}
       propertyPath: maxHeath
-      value: 50
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 320040645503636504, guid: 49a041f91bdcf0a46b779ff24311aa49, type: 3}
       propertyPath: m_Layer
@@ -29852,7 +29852,7 @@ PrefabInstance:
       objectReference: {fileID: 1345516995}
     - target: {fileID: 3627910950811453840, guid: 49a041f91bdcf0a46b779ff24311aa49, type: 3}
       propertyPath: parallaxScales.Array.data[0]
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 3697147636423241952, guid: 49a041f91bdcf0a46b779ff24311aa49, type: 3}
       propertyPath: m_Layer
