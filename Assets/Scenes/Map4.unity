@@ -29744,11 +29744,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -1745812415914707395, guid: 49a041f91bdcf0a46b779ff24311aa49, type: 3}
       propertyPath: heath
-      value: 1000
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: -1745812415914707395, guid: 49a041f91bdcf0a46b779ff24311aa49, type: 3}
       propertyPath: maxHeath
-      value: 1000
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 320040645503636504, guid: 49a041f91bdcf0a46b779ff24311aa49, type: 3}
       propertyPath: m_Layer
