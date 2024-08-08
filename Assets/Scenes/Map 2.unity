@@ -2140,6 +2140,14 @@ PrefabInstance:
       propertyPath: m_Size.x
       value: 78.81466
       objectReference: {fileID: 0}
+    - target: {fileID: 8463497450260883363, guid: 535d4db06616d654bbab842b0ce86e95, type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8463497450260883363, guid: 535d4db06616d654bbab842b0ce86e95, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 787853409
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14885,6 +14893,10 @@ PrefabInstance:
       propertyPath: backgrounds.Array.data[0]
       value: 
       objectReference: {fileID: 1301806110}
+    - target: {fileID: 3627910950811453840, guid: 49a041f91bdcf0a46b779ff24311aa49, type: 3}
+      propertyPath: parallaxScales.Array.data[0]
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 3806540884395615817, guid: 49a041f91bdcf0a46b779ff24311aa49, type: 3}
       propertyPath: m_Layer
       value: 7
