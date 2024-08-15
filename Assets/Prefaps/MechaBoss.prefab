@@ -44,6 +44,10 @@ PrefabInstance:
       value: MechaBoss
       objectReference: {fileID: 0}
     - target: {fileID: 3626916397498700004, guid: 9ad800b2dd348ec4097d449502462c88, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1906357400, guid: 46414d7f1ec55384f8ca068007e4d190, type: 3}
+    - target: {fileID: 3626916397498700004, guid: 9ad800b2dd348ec4097d449502462c88, type: 3}
       propertyPath: m_SortingLayer
       value: 4
       objectReference: {fileID: 0}
