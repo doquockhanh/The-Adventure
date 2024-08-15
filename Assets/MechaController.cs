@@ -28,7 +28,7 @@ public class MechaController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
+        anm = GetComponent<Animator>();
         bulletPool = new List<GameObject>();
         for (int i = 0; i < poolSize; i++)
         {
@@ -94,9 +94,14 @@ public class MechaController : MonoBehaviour
         float moveX = speed * (transform.localScale.x / Mathf.Abs(transform.localScale.x)) * Time.fixedDeltaTime;
         transform.position = new Vector3(transform.position.x + moveX, transform.position.y, transform.position.z);
     }
+    private void Stop()
+    {
+
+    }
 
     void Fire()
     {
+        anm.SetTrigger("Shoot");
         for (int i = 0; i < bulletPool.Count; i++)
         {
             if (!bulletPool[i].activeInHierarchy)
@@ -104,7 +109,6 @@ public class MechaController : MonoBehaviour
                 bulletPool[i].transform.position = transform.Find("SpawnBullet").position;
                 bulletPool[i].transform.rotation = Quaternion.identity;
                 bulletPool[i].SetActive(true);
-                //anm.SetTrigger("Fire");
                 return;
             }
         }
