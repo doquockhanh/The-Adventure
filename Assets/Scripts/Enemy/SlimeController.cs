@@ -22,10 +22,13 @@ public class SlimeController : MonoBehaviour
     private float initPosition;
     private bool isMovingRight = true;
     private Stats stats;
+    private bool stopMove;
     public GameObject slimeMiniPrefab;
+    private Animator anm;
 
     void Start()
     {
+        anm = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(CheckFollow());
         initPosition = transform.position.x;
@@ -44,9 +47,9 @@ public class SlimeController : MonoBehaviour
             case SlimeStatus.follow:
                 Follow();
                 break;
-            case SlimeStatus.moving:
+            case SlimeStatus.moving:                         
                 CheckMoveOutRange();
-                Moving();
+                Moving();             
                 break;
         }
     }
@@ -61,26 +64,28 @@ public class SlimeController : MonoBehaviour
 
     private void Moving()
     {
-        if (isMovingRight)
+        if (stopMove == false)
         {
-            if (transform.localScale.x < 0)
+            if (isMovingRight)
             {
-                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                if (transform.localScale.x < 0)
+                {
+                    transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                }
+                float moveX = speed * Time.fixedDeltaTime;
+                transform.position = new Vector3(transform.position.x + moveX, transform.position.y, transform.position.z);
             }
-            float moveX = speed * Time.fixedDeltaTime;
-            transform.position = new Vector3(transform.position.x + moveX, transform.position.y, transform.position.z);
-        }
-        else
-        {
-            if (transform.localScale.x > 0)
+            else
             {
-                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                if (transform.localScale.x > 0)
+                {
+                    transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                }
+                float moveX = speed * Time.fixedDeltaTime;
+                transform.position = new Vector3(transform.position.x - moveX, transform.position.y, transform.position.z);
             }
-            float moveX = speed * Time.fixedDeltaTime;
-            transform.position = new Vector3(transform.position.x - moveX, transform.position.y, transform.position.z);
         }
     }
-
     void CheckMoveOutRange()
     {
         if (transform.position.x > initPosition + movingRange || transform.position.x < initPosition - movingRange)
@@ -100,7 +105,8 @@ public class SlimeController : MonoBehaviour
 
     public void OnDeath(Stats stats)
     {
-        
+        stopMove = true;
+        anm.SetTrigger("Boom");
         StartCoroutine(DelaySpawn());
     }
 

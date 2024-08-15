@@ -19,7 +19,7 @@ public class Arrow : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector2.left * speedArrow * Time.deltaTime);
-        Destroy(gameObject, 3);
+        Destroy(gameObject, 2.5f);
     }
     private void OnTriggerEnter2D(Collider2D collider)
     {
